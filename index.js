@@ -1,10 +1,12 @@
-function findPeakElement(nums) {
-  let left = 0;
-  let right = nums.length - 1;
-  while (left < right) {
-    const mid = Math.floor((left + right) / 2);
-    if (nums[mid] < nums[mid + 1]) left = mid + 1;
-    else right = mid;
+function isValidParentheses(s) {
+  const stack = [];
+  const map = { "(": ")", "[": "]", "{": "}" };
+  for (const char of s) {
+    if (char in map) stack.push(char);
+    else {
+      const top = stack.pop();
+      if (map[top] !== char) return false;
+    }
   }
-  return left;
+  return stack.length === 0;
 }
